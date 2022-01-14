@@ -1,0 +1,52 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.gates.logic.US}
+\usetikzlibrary{circuits.ee.IEC}
+
+\title{Assignment 1}
+\author{Krunal Badlani (IS21MTECH14008)}
+\date{14 January 2022}
+
+\begin{document}
+
+\maketitle
+
+\section{Question}
+Draw the Logic Circuit of the following Boolean Expression : 
+
+(U' + V).(V' + W) 
+
+\section{Answer}
+The circuit obtained would look like this:
+
+
+
+    \begin{center}
+    \begin{tikzpicture}[ circuit symbol wires]
+    
+    \node (u) at (0,4.5) {$u$};
+    \node (v) at (0,2.5) {$v$};
+    \node (w) at (0,0.5) {$w$};
+    \node[not gate US, minimum size=32pt, draw] at (1.5,0.5) (NOT) {};
+    \node[not gate US, minimum size=32pt, draw] at (1.5,2.5) (NOT2) {};
+    \node[not gate US, minimum size=32pt, draw] at (1.5,4.5) (NOT3) {};
+    \node[or gate US, minimum size=32pt, draw] at (4.5,1) (OR) {};
+    \node[or gate US, minimum size=32pt, draw] at (4.5,4) (OR1) {};
+    \node[and gate US, minimum size=32pt, draw] at (7.5,2.5) (AND) {};
+    \draw (u.east)  |- (NOT3.input 2);
+    \draw (v.east)  |- (NOT2.input 1);
+    \draw (w.east)  |- (NOT.input 1);
+    \draw (v.east)  |- (OR1.input 2);
+    \draw (NOT3.output) |- (OR1.input 1);
+    \draw (NOT.output) |-(OR.input 2);
+    \draw (NOT2.output) |- (OR.input 1);
+    \draw (OR1.output) |- (AND.input 1);
+    \draw (OR.output) |- (AND.input 2);
+    \draw (8.3,2.5) -- (9.5,2.5) ;
+    \node (o) at (11.2,2.5) {$O=(u'+v).(v'+w')$};
+    \end{tikzpicture}
+    \end{center}
+
+\end{document}
